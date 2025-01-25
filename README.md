@@ -77,22 +77,5 @@ Package Name        |
 
 <br/>
 
-## Created & Maintained By
-
-[SinaSys](https://github.com/SinaSys) 
-
-
-## Contributors
-• [mufarrah](https://github.com/mufarrah)
-<br/>
-<br/>
-
-##  Other flutter projects
- Project Name        |Stars        
-:-------------------------|-------------------------
-[Go rest app](https://github.com/SinaSys/flutter_go_rest_app)|![GitHub stars](https://img.shields.io/github/stars/SinaSys/flutter_go_rest_app?style=social)
-[Japanese restaurant app](https://github.com/SinaSys/flutter_japanese_restaurant_app)| ![GitHub stars](https://img.shields.io/github/stars/SinaSys/flutter_japanese_restaurant_app?style=social)
-|[Office furniture store app](https://github.com/SinaSys/flutter_office_furniture_store_app) |![GitHub stars](https://img.shields.io/github/stars/SinaSys/flutter_office_furniture_store_app?style=social)
-
 
 
