@@ -1,67 +1,69 @@
-import 'package:get/get.dart';
+import '../../product_by_category_screen/product_by_category_screen.dart';
+import '../../../utility/animation/open_container_wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:e_commerce_flutter/src/model/product_category.dart';
+import '../../../models/category.dart';
 
-class CategorySelector extends StatefulWidget {
+class CategorySelector extends StatelessWidget {
+  final List<Category> categories;
+
+
   const CategorySelector({
     super.key,
     required this.categories,
-    required this.onItemPressed,
   });
-
-  final List<ProductCategory> categories;
-  final Function(int) onItemPressed;
-
-  @override
-  State<CategorySelector> createState() => _CategorySelectorState();
-}
-
-class _CategorySelectorState extends State<CategorySelector> {
-  Widget item(ProductCategory item, int index) {
-    return Tooltip(
-      message: item.type.name.capitalizeFirst,
-      child: AnimatedContainer(
-        margin: const EdgeInsets.only(left: 5),
-        duration: const Duration(milliseconds: 500),
-        width: 50,
-        height: 100,
-        decoration: BoxDecoration(
-          color: item.isSelected == false
-              ? const Color(0xFFE5E6E8)
-              : const Color(0xFFf16b26),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: IconButton(
-          splashRadius: 0.1,
-          icon: FaIcon(
-            item.icon,
-            color: item.isSelected == false
-                ? const Color(0xFFA6A3A0)
-                : Colors.white,
-          ),
-          onPressed: () {
-            widget.onItemPressed(index);
-            for (var element in widget.categories) {
-              element.isSelected = false;
-            }
-
-            item.isSelected = true;
-            setState(() {});
-          },
-        ),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 60,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: widget.categories.length,
-        itemBuilder: (_, index) => item(widget.categories[index], index),
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          final category = categories[index];
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 6,vertical: 1),
+            child: OpenContainerWrapper(
+              nextScreen: ProductByCategoryScreen(selectedCategory: categories[index]),
+              child: Container(
+                width: 80,
+                height: 80,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                decoration: BoxDecoration(
+                  color: category.isSelected ? const Color(0xFFf16b26) : const Color(0xFFE5E6E8),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                alignment: Alignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Image.network(
+                        category.image ?? '',
+                        width: 90,
+                        height: 90,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) {
+                          return const Icon(Icons.error, color: Colors.grey);
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      category.name ?? '',
+                      style: TextStyle(
+                        color: category.isSelected ? Colors.white : Colors.black,
+                        fontSize: 12,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

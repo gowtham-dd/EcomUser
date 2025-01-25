@@ -9,9 +9,8 @@ class SnackBarHelper {
       backgroundColor: Colors.red,
       colorText: Colors.white,
       borderRadius: 20,
-      margin: EdgeInsets.symmetric(horizontal: 300),
-      duration: Duration(seconds: 3),
-      icon: Icon(Icons.error, color: Colors.white),
+      duration: const Duration(seconds: 3),
+      icon: const Icon(Icons.error, color: Colors.white),
     );
   }
 
@@ -22,9 +21,8 @@ class SnackBarHelper {
       backgroundColor: Colors.green,
       colorText: Colors.white,
       borderRadius: 20,
-      margin: EdgeInsets.symmetric(horizontal: 300),
-      duration: Duration(seconds: 3),
-      icon: Icon(Icons.check_circle, color: Colors.white),
+      duration: const Duration(seconds: 3),
+      icon: const Icon(Icons.check_circle, color: Colors.white),
     );
   }
 }

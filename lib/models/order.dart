@@ -43,7 +43,7 @@ class Order {
         items!.add(new Items.fromJson(v));
       });
     }
-    totalPrice = json['totalPrice'];
+    totalPrice = json['totalPrice']?.toDouble();;
     paymentMethod = json['paymentMethod'];
     couponCode = json['couponCode'] != null
         ? new CouponCode.fromJson(json['couponCode'])
@@ -82,6 +82,7 @@ class Order {
 }
 
 class ShippingAddress {
+  String? phone;
   String? street;
   String? city;
   String? state;
@@ -89,9 +90,15 @@ class ShippingAddress {
   String? country;
 
   ShippingAddress(
-      {this.street, this.city, this.state, this.postalCode, this.country});
+      {this.phone,
+        this.street,
+        this.city,
+        this.state,
+        this.postalCode,
+        this.country});
 
   ShippingAddress.fromJson(Map<String, dynamic> json) {
+    phone = json['phone'];
     street = json['street'];
     city = json['city'];
     state = json['state'];
@@ -101,6 +108,7 @@ class ShippingAddress {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['phone'] = this.phone;
     data['street'] = this.street;
     data['city'] = this.city;
     data['state'] = this.state;
@@ -112,15 +120,15 @@ class ShippingAddress {
 
 class OrderTotal {
   double? subtotal;
-  int? discount;
+  double? discount;
   double? total;
 
   OrderTotal({this.subtotal, this.discount, this.total});
 
   OrderTotal.fromJson(Map<String, dynamic> json) {
-    subtotal = json['subtotal'];
-    discount = json['discount'];
-    total = json['total'];
+    subtotal = json['subtotal']?.toDouble();
+    discount = json['discount']?.toDouble();
+    total = json['total']?.toDouble();
   }
 
   Map<String, dynamic> toJson() {
@@ -171,7 +179,7 @@ class Items {
     productID = json['productID'];
     productName = json['productName'];
     quantity = json['quantity'];
-    price = json['price'];
+    price = json['price']?.toDouble();
     variant = json['variant'];
     sId = json['_id'];
   }

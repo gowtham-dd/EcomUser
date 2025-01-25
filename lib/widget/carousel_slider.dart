@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../utility/app_color.dart';
+import '../models/product.dart';
+import '../utility/utility_extention.dart';
+import 'custom_network_image.dart';
 
 class CarouselSlider extends StatefulWidget {
   const CarouselSlider({
@@ -9,7 +12,7 @@ class CarouselSlider extends StatefulWidget {
     required this.items,
   });
 
-  final List<String> items;
+  final List<Images> items;
 
   @override
   State<CarouselSlider> createState() => _CarouselSliderState();
@@ -34,7 +37,11 @@ class _CarouselSliderState extends State<CarouselSlider> {
             itemBuilder: (_, index) {
               return FittedBox(
                 fit: BoxFit.none,
-                child: Image.asset(widget.items[index], scale: 3),
+                child: CustomNetworkImage(
+                  imageUrl: widget.items.safeElementAt(index)?.url ?? '',
+                  fit: BoxFit.contain,
+                  scale: 3.0,
+                ),
               );
             },
           ),

@@ -3,12 +3,12 @@ class Product {
   String? name;
   String? description;
   int? quantity;
-  int? price;
-  int? offerPrice;
+  double? price;
+  double? offerPrice;
   ProRef? proCategoryId;
   ProRef? proSubCategoryId;
   ProRef? proBrandId;
-  ProRef? proVariantTypeId;
+  ProTypeRef? proVariantTypeId;
   List<String>? proVariantId;
   List<Images>? images;
   String? createdAt;
@@ -37,8 +37,8 @@ class Product {
     name = json['name'];
     description = json['description'];
     quantity = json['quantity'];
-    price = json['price'];
-    offerPrice = json['offerPrice'];
+    price = json['price']?.toDouble();
+    offerPrice = json['offerPrice']?.toDouble();;
     proCategoryId = json['proCategoryId'] != null
         ? new ProRef.fromJson(json['proCategoryId'])
         : null;
@@ -49,7 +49,7 @@ class Product {
         ? new ProRef.fromJson(json['proBrandId'])
         : null;
     proVariantTypeId = json['proVariantTypeId'] != null
-        ? new ProRef.fromJson(json['proVariantTypeId'])
+        ? new ProTypeRef.fromJson(json['proVariantTypeId'])
         : null;
     proVariantId = json['proVariantId'].cast<String>();
     if (json['images'] != null) {
@@ -109,6 +109,25 @@ class ProRef {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['_id'] = this.sId;
     data['name'] = this.name;
+    return data;
+  }
+}
+
+class ProTypeRef {
+  String? sId;
+  String? type;
+
+  ProTypeRef({this.sId, this.type});
+
+  ProTypeRef.fromJson(Map<String, dynamic> json) {
+    sId = json['_id'];
+    type = json['type'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['_id'] = this.sId;
+    data['type'] = this.type;
     return data;
   }
 }
