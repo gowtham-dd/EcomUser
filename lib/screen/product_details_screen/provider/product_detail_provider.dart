@@ -3,7 +3,6 @@ import 'package:e_commerce_flutter/utility/snack_bar_helper.dart';
 import 'package:e_commerce_flutter/utility/utility_extention.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_cart/flutter_cart.dart';
-import 'package:get/get.dart';
 import '../../../core/data/data_provider.dart';
 
 class ProductDetailProvider extends ChangeNotifier {
